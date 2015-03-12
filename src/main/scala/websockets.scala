@@ -16,5 +16,20 @@ import java.util.Arrays;
 
 object Websockets {
   val PORT:Int = 8080
-  def main(args: Array[String]) = println("Hi!")
+  def main(args: Array[String]) = {
+    try {
+      doIt()
+    } catch {
+      case e: Exception => print("exception happened. exiting.")
+    }
+  }
+  @throws(classOf[Exception])
+  def doIt() = {
+    val serverSocket: ServerSocket = new ServerSocket(PORT)
+    val webSocketServerSocket: WebSocketServerSocket = new WebSocketServerSocket(serverSocket)
+    val messageQueue: StringMessageQueue = new StringMessageQueue()
+    val connections: LinkedList[WebSocket] = new LinkedList[WebSocket]()
+    val buffer: ByteAccumulator = new ByteAccumulator()
+    println("Hi!")
+  }
 }
