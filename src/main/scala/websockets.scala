@@ -3,7 +3,6 @@ import com.pmeade.websocket.net.WebSocket
 import com.pmeade.websocket.net.WebSocketServerSocket
 import com.pmeade.websocket.example.WebSocketConsumerThread
 import com.pmeade.websocket.example.StringMessageQueue
-import com.pmeade.websocket.example.ByteAccumulator
 import com.pmeade.websocket.example.WebSocketThread
 import java.io.IOException
 import java.io.InputStream
@@ -29,7 +28,6 @@ object Websockets {
     val webSocketServerSocket: WebSocketServerSocket = new WebSocketServerSocket(serverSocket)
     val messageQueue: StringMessageQueue = new StringMessageQueue()
     val connections: LinkedList[WebSocket] = new LinkedList[WebSocket]()
-    val buffer: ByteAccumulator = new ByteAccumulator()
     println("Hi!")
   }
 }
