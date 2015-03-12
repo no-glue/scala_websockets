@@ -19,7 +19,7 @@ object Websockets {
     try {
       doIt()
     } catch {
-      case e: Exception => print("exception happened. exiting.")
+      case e: Exception => print("exception happened. exiting. " + e.getLocalizedMessage() + ".")
     }
   }
   @throws(classOf[Exception])
@@ -28,6 +28,12 @@ object Websockets {
     val webSocketServerSocket: WebSocketServerSocket = new WebSocketServerSocket(serverSocket)
     val messageQueue: StringMessageQueue = new StringMessageQueue()
     val connections: LinkedList[WebSocket] = new LinkedList[WebSocket]()
+    new WebSocketConsumerThread(messageQueue, connections).start()
+    while(true) {
+      var socket: WebSocket = webSocketServerSocket.accept()
+      connections.add(socket)
+      new WebSocketThread(socket, messageQueue).start()
+    }
     println("Hi!")
   }
 }
